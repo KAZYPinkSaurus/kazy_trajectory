@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import sys
 import glob
+import os.path
 
 
 class VisualizeTrajectory(object):
@@ -65,5 +66,5 @@ class VisualizeTrajectory(object):
                 df = df.loc[:,[self.lat_name,self.long_name]].dropna()
             else:
                 continue
-            save_for = save_path+i.split('/')[-1].split('.')[0]+'.html'
+            save_for = save_path+os.path.splitext(i.split('/')[-1])[0]+'.html'
             self.drow_map([df[self.lat_name], df[self.long_name]], save_for)
