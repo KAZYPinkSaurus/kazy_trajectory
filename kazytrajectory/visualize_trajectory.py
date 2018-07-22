@@ -213,3 +213,45 @@ class VisualizeTrajectory(object):
         plt.tick_params(labelsize=5)
         plt.savefig(save_path)            
             
+    def plot_histgram(self, trajectories_path, column_names,_bins, save_path):
+        """
+        ディレクトリ内の系列データ(csv,tsv)の指定カラムのヒストグラム作成
+
+        trajectories_path = 'hoge/trajectories/'
+
+        column_names = ['speed','acceleration']
+
+        save_path = 'hoge/'
+
+        """
+        # data
+        files = glob.glob(trajectories_path + '*')
+        is_first = True
+
+        df_all  = pd.DataFrame(columns=column_names)
+        # for all data
+        for i in files:
+            print(i)
+            file_extension = i.split('.')[-1] 
+            # load data
+            if file_extension == 'tsv':
+                # delete all rows which has NaN
+                df = pd.read_table(i,header=1)
+                df = df.loc[:, column_names].dropna()
+                df_all = pd.concat([df_all,df])
+            elif file_extension == 'csv':
+                # delete all rows which has NaN
+                df = pd.read_csv(i,header=1)
+                df = df.loc[:, column_names].dropna()
+                df_all = pd.concat([df_all,df])
+            else:
+                continue
+        
+        for j in column_names:
+            plt.figure()
+            plt.hist(df_all[j], bins=_bins)
+            plt.title(j)
+            save_for = save_path + 'hist_' + j + '{0:%y%m%d%H%M}'.format(datetime.datetime.now()) + '.eps' 
+            plt.savefig(save_for)
+
+
