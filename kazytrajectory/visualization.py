@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 
 
-class Visualize(object):
+class Visualization(object):
     def __init__(self,name_lat_long=['latitude','longitude'],overlay= False):
         """
         name_lat_long = ['lat', 'long']
