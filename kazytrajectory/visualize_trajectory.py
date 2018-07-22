@@ -5,6 +5,8 @@ import sys
 import glob
 import os.path
 import datetime
+import matplotlib.pyplot as plt
+
 
 
 class VisualizeTrajectory(object):
@@ -128,3 +130,84 @@ class VisualizeTrajectory(object):
                 
                 save_for = save_path + os.path.splitext(i.split('/')[-1])[0] + '.html'
                 self.drow_map([df[self.lat_name], df[self.long_name]], save_for)
+
+    def plot_coordinate(self, location, save_path):
+        """
+        location = [df_lat, df_long]
+
+        save_path = 'hoge/hogehoge.html'
+        """
+        
+        plt.figure()
+        plt.plot(location[1], location[0],linewidth=0.1)
+        plt.ylabel('latitude')
+        plt.xlabel('longitude')
+        plt.axis('scaled')
+        plt.tick_params(labelsize=5)
+        plt.savefig(save_path)
+    
+    def plot_coordinates(self, trajectories_path, save_path):
+        """
+        trajectories_path = 'hoge/trajectories/'
+
+        save_path = 'hoge/maps/'
+        """
+        # data
+        files = glob.glob(trajectories_path + '*')
+        
+        if self.overlay:
+            save_for = save_path + 'all_plot_' + '{0:%y%m%d%H%M}'.format(datetime.datetime.now()) + '.eps'
+            self.__plot_coordinates_overlay(files, save_for)
+            
+        else:
+            # for all data
+            for i in files:
+                print(i)
+                file_extension = i.split('.')[-1] 
+                # load data
+                if file_extension == 'tsv':
+                    # delete all rows which has NaN
+                    df = pd.read_table(i,header=1)
+                    df = df.loc[:,[self.lat_name,self.long_name]].dropna()
+                elif file_extension == 'csv':
+                    # delete all rows which has NaN
+                    df = pd.read_csv(i,header=1)
+                    df = df.loc[:,[self.lat_name,self.long_name]].dropna()
+                else:
+                    continue
+                
+                save_for = save_path + os.path.splitext(i.split('/')[-1])[0] + '.eps'
+                self.plot_coordinate([df[self.lat_name], df[self.long_name]], save_for)
+
+    def __plot_coordinates_overlay(self, trajectory_files, save_path):
+        """
+        trajectry_files = [a.csv,b.csv.....]
+
+        save_path = ./hoge/fuga.html
+        """
+
+        plt.figure()
+        
+        for i in trajectory_files:
+            print(i)
+            file_extension = i.split('.')[-1] 
+            # load data
+            if file_extension == 'tsv':
+                # delete all rows which has NaN
+                df = pd.read_table(i,header=1)
+                df = df.loc[:,[self.lat_name,self.long_name]].dropna()
+            elif file_extension == 'csv':
+                # delete all rows which has NaN
+                df = pd.read_csv(i,header=1)
+                df = df.loc[:,[self.lat_name,self.long_name]].dropna()
+            else:
+                continue
+
+            plt.plot(df[self.long_name], df[self.lat_name], linewidth=0.1)
+            
+        plt.ylabel('latitude')
+        plt.xlabel('longitude')
+        plt.axis('scaled')
+        plt.tick_params(labelsize=5)
+        plt.savefig(save_path)            
+            
