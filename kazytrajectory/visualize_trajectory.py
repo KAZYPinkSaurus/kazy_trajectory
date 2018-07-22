@@ -226,7 +226,6 @@ class VisualizeTrajectory(object):
         """
         # data
         files = glob.glob(trajectories_path + '*')
-        is_first = True
 
         df_all  = pd.DataFrame(columns=column_names)
         # for all data
@@ -253,5 +252,3 @@ class VisualizeTrajectory(object):
             plt.title(j)
             save_for = save_path + 'hist_' + j + '{0:%y%m%d%H%M}'.format(datetime.datetime.now()) + '.eps' 
             plt.savefig(save_for)
-
-
