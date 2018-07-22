@@ -80,6 +80,6 @@ class Symbolization(object):
         
         # save for csv file
         f = open(save_for, 'w')
-        writer = csv.writer(f, lineterminator='\n')
+        writer = csv.writer(f,delimiter=' ',lineterminator='\n')
         writer.writerows(sequences)
         f.close()
