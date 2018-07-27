@@ -27,7 +27,7 @@ class Symbolization(object):
 
         sequence = []
 
-        for index, row in dataframe.iterrows():
+        for _index, row in dataframe.iterrows():
             is_first = True
             item = ''
             sequence.append(str(self.label))
