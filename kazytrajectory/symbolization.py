@@ -68,11 +68,11 @@ class Symbolization(object):
             # load data
             if file_extension == 'tsv':
                 # delete all rows which has NaN
-                df = pd.read_table(i,header=1)
+                df = pd.read_table(i)
                 df = df.loc[:,self.columns].dropna()
             elif file_extension == 'csv':
                 # delete all rows which has NaN
-                df = pd.read_csv(i,header=1)
+                df = pd.read_csv(i)
                 df = df.loc[:,self.columns].dropna()
             else:
                 continue

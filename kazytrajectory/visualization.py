@@ -69,11 +69,11 @@ class Visualization(object):
             # load data
             if file_extension == 'tsv':
                 # delete all rows which has NaN
-                df = pd.read_table(i,header=1)
+                df = pd.read_table(i)
                 df = df.loc[:,[self.lat_name,self.long_name]].dropna()
             elif file_extension == 'csv':
                 # delete all rows which has NaN
-                df = pd.read_csv(i,header=1)
+                df = pd.read_csv(i)
                 df = df.loc[:,[self.lat_name,self.long_name]].dropna()
             else:
                 continue
@@ -121,11 +121,11 @@ class Visualization(object):
                 # load data
                 if file_extension == 'tsv':
                     # delete all rows which has NaN
-                    df = pd.read_table(i,header=1)
+                    df = pd.read_table(i)
                     df = df.loc[:,[self.lat_name,self.long_name]].dropna()
                 elif file_extension == 'csv':
                     # delete all rows which has NaN
-                    df = pd.read_csv(i,header=1)
+                    df = pd.read_csv(i)
                     df = df.loc[:,[self.lat_name,self.long_name]].dropna()
                 else:
                     continue
@@ -169,11 +169,11 @@ class Visualization(object):
                 # load data
                 if file_extension == 'tsv':
                     # delete all rows which has NaN
-                    df = pd.read_table(i,header=1)
+                    df = pd.read_table(i)
                     df = df.loc[:,[self.lat_name,self.long_name]].dropna()
                 elif file_extension == 'csv':
                     # delete all rows which has NaN
-                    df = pd.read_csv(i,header=1)
+                    df = pd.read_csv(i)
                     df = df.loc[:,[self.lat_name,self.long_name]].dropna()
                 else:
                     continue
@@ -196,11 +196,11 @@ class Visualization(object):
             # load data
             if file_extension == 'tsv':
                 # delete all rows which has NaN
-                df = pd.read_table(i,header=1)
+                df = pd.read_table(i)
                 df = df.loc[:,[self.lat_name,self.long_name]].dropna()
             elif file_extension == 'csv':
                 # delete all rows which has NaN
-                df = pd.read_csv(i,header=1)
+                df = pd.read_csv(i)
                 df = df.loc[:,[self.lat_name,self.long_name]].dropna()
             else:
                 continue
@@ -235,12 +235,12 @@ class Visualization(object):
             # load data
             if file_extension == 'tsv':
                 # delete all rows which has NaN
-                df = pd.read_table(i,header=1)
+                df = pd.read_table(i)
                 df = df.loc[:, column_names].dropna()
                 df_all = pd.concat([df_all,df])
             elif file_extension == 'csv':
                 # delete all rows which has NaN
-                df = pd.read_csv(i,header=1)
+                df = pd.read_csv(i)
                 df = df.loc[:, column_names].dropna()
                 df_all = pd.concat([df_all,df])
             else:
