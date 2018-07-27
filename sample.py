@@ -9,7 +9,7 @@ if __name__ == '__main__':
     python main.py data/hoge/ output/fuga/
     """
     args = sys.argv
-    # 入力 データのpath, 各種パラメータ
+    # input datapath, parameter
     
     #path of trajectories directory 
     trajectories_path = args[1]
