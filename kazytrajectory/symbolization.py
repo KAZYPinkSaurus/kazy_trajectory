@@ -7,15 +7,18 @@ import csv
 import datetime
 
 class Symbolization(object):
-    def __init__(self, column_names,thresholds):
+    def __init__(self, column_names,thresholds,label):
         """
         column_names = ['hoge','huga'] : columns using process
 
         thresholds = [[-3,0,2,3.5],[2,10]] :  sorted list!!!
 
+        label = -1
+
         """
         self.columns = column_names
         self.thresholds = thresholds
+        self.label = label
 
     def symbolize(self,dataframe):
         """
@@ -27,6 +30,7 @@ class Symbolization(object):
         for index, row in dataframe.iterrows():
             is_first = True
             item = ''
+            sequence.append(str(self.label))
             for i, j in zip(self.columns, self.thresholds):
                 symbol = 0
                 for k in j:
