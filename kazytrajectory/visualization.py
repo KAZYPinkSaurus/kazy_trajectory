@@ -81,12 +81,13 @@ class Visualization(object):
                 is_first_file = False
             
             folium.PolyLine(location_list,opacity=0.3, color='gray').add_to(my_map)
-            folium.Marker(location_list[0], popup='start', icon=folium.Icon(color='red', icon='star')).add_to(my_map)
+            # folium.Marker(location_list[0], popup='start', icon=folium.Icon(color='red', icon='star')).add_to(my_map)
             
             for lat_lon in location_list:   
                 folium.CircleMarker(lat_lon, radius=1, color='blue').add_to(my_map)
             else:
-                folium.Marker(lat_lon, popup='end',icon=folium.Icon(color='green',icon='flag')).add_to(my_map)
+                pass
+                # folium.Marker(lat_lon, popup='end',icon=folium.Icon(color='green',icon='flag')).add_to(my_map)
         
         my_map.save(save_path)
         
@@ -350,7 +351,7 @@ class Visualization(object):
             symbol_list = sbl.symbolize(df)
             symbol_list_length = len(symbol_list)
 
-            # -1 means no mark
+            # gray means no mark
             marker_color_list = ['gray'] * symbol_list_length
 
             for i in range(symbol_list_length):
@@ -371,12 +372,13 @@ class Visualization(object):
                 is_first_file = False
             
             folium.PolyLine(location_list,opacity=0.3, color='gray').add_to(my_map)
-            folium.Marker(location_list[0], popup='start', icon=folium.Icon(color='red', icon='star')).add_to(my_map)
+            # folium.Marker(location_list[0], popup='start', icon=folium.Icon(color='red', icon='star')).add_to(my_map)
             
             for (lat_lon,c) in zip(location_list,marker_color_list):   
                 folium.CircleMarker(lat_lon, radius=1, color=c).add_to(my_map)
             else:
-                folium.Marker(lat_lon, popup='end',icon=folium.Icon(color='green',icon='flag')).add_to(my_map)
+                pass
+                # folium.Marker(lat_lon, popup='end',icon=folium.Icon(color='green',icon='flag')).add_to(my_map)
         
         my_map.save(save_path)
 
