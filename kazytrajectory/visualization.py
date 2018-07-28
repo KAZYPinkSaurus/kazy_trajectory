@@ -269,12 +269,8 @@ class Visualization(object):
 
         sbl = symbolization.Symbolization(column_names, thresholds, False)
 
-        print(df)
-
         symbol_list = sbl.symbolize(df)
         symbol_list_length = len(symbol_list)
-
-        print(symbol_list)
 
         # -1 means no mark
         marker_color_list = ['gray'] * symbol_list_length
