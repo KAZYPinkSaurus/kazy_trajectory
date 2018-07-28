@@ -30,7 +30,8 @@ class Symbolization(object):
         for _index, row in dataframe.iterrows():
             is_first = True
             item = ''
-            sequence.append(str(self.label))
+            if not(self.label == False):
+                sequence.append(str(self.label))
             for i, j in zip(self.columns, self.thresholds):
                 symbol = 0
                 for k in j:
