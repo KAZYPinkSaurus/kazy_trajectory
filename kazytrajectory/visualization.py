@@ -304,7 +304,7 @@ class Visualization(object):
             folium.Marker(lat_lon, popup='end',icon=folium.Icon(color='green',icon='flag')).add_to(my_map)
         my_map.save(save_path)
 
-    def __highlight_patterns_on_maps_overlay(self, trajectory_files, patterns, column_names, thresholds, save_path, colors=['red', 'blue', 'green', 'black','yellow']):        
+    def __highlight_patterns_on_maps_overlay(self, trajectory_files, patterns, column_names, thresholds, save_path, part_flag, colors=['red', 'blue', 'green', 'black','yellow']):        # ishiyama's addition
         """
         trajectry_files = [a.csv,b.csv.....]
 
@@ -334,6 +334,7 @@ class Visualization(object):
 
         for i in trajectory_files:
             print(i)
+            pattern_in_file = False     # Ishiyama's addition
             file_extension = i.split('.')[-1] 
             # load data
             if file_extension == 'tsv':
@@ -362,10 +363,15 @@ class Visualization(object):
                         ptn = j.split(' ')
                         ptn_len = len(ptn)
                         if ptn == symbol_list[i:i + ptn_len]:
-                            marker_color_list[i:i + ptn_len] = [c] * ptn_len                                      
+                            marker_color_list[i:i + ptn_len] = [c] * ptn_len
+                            pattern_in_file = True            # Ishiyama's addition                                                        
 
             location_list = np.array([df[self.lat_name], df[self.long_name]])
             location_list = location_list.T.tolist()
+
+            # Ishiyama's addition
+            if part_flag and not(pattern_in_file):
+                continue
 
             if is_first_file:
                 my_map = folium.Map(location_list[0], zoom_start=15)
@@ -382,7 +388,7 @@ class Visualization(object):
         
         my_map.save(save_path)
 
-    def highlight_patterns_on_maps(self, trajectories_path, patterns, column_names, thresholds, save_path, colors=['red', 'blue', 'green', 'black','yellow']):
+    def highlight_patterns_on_maps(self, trajectories_path, patterns, column_names, thresholds, save_path, colors=['red', 'blue', 'green', 'black','yellow'], part_flag=False):      # Ishiyama's addition
         """
         trajectories_path = 'hoge/trajectories/'
 
@@ -401,7 +407,7 @@ class Visualization(object):
         
         if self.overlay:
             save_for = save_path + 'overlay_highlight_patterns_' + '{0:%y%m%d%H%M}'.format(datetime.datetime.now()) + '.html'
-            self.__highlight_patterns_on_maps_overlay(files, patterns, column_names, thresholds, save_for, colors)
+            self.__highlight_patterns_on_maps_overlay(files, patterns, column_names, thresholds, save_for, part_flag, colors)        # Ishiyama's addition
             
         else:
             # for all data
