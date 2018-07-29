@@ -388,7 +388,7 @@ class Visualization(object):
         
         my_map.save(save_path)
 
-    def highlight_patterns_on_maps(self, trajectories_path, patterns, column_names, thresholds, save_path, colors=['red', 'blue', 'green', 'black','yellow'], part_flag=False):      # Ishiyama's addition
+    def highlight_patterns_on_maps(self, trajectories_path, patterns, column_names, thresholds, save_path,part_flag=False,colors=['red', 'blue', 'green', 'black','yellow']):      # Ishiyama's addition
         """
         trajectories_path = 'hoge/trajectories/'
 
