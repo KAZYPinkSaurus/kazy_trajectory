@@ -52,7 +52,7 @@ class Symbolization(object):
                         item += ':' + str(symbol)
             else:
                 sequence.append(item)
-        
+
         return sequence
 
     def symbolize_trajectories(self,trajectories_path, save_path):
@@ -63,13 +63,14 @@ class Symbolization(object):
         """
 
         files = glob.glob(trajectories_path + '*')
+        files.sort()
         save_for = save_path + 'sequence_' + '{0:%y%m%d%H%M}'.format(datetime.datetime.now()) + '.csv'
 
         sequences = []
         # for all data
         for i in files:
             print(i)
-            file_extension = i.split('.')[-1] 
+            file_extension = i.split('.')[-1]
             # load data
             if file_extension == 'tsv':
                 # delete all rows which has NaN
